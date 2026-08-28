@@ -1,6 +1,6 @@
 # Navigation Transitions in SwiftUI for System 27
 
-![AppIcon128](Images/AppIcon128.png) This is the **starter project** for the video on Navigation Transitions in SwiftUI for System 27
+![AppIcon128](Images/AppIcon128.png) This is the **completed source code** for the video on Navigation Transitions in SwiftUI for System 27
 
 If you want to support my work, you can - </br>
 

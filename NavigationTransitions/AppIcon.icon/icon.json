@@ -1,0 +1,35 @@
+{
+  "fill" : {
+    "automatic-gradient" : "srgb:0.59718,1.00000,0.82360,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "E64DD0B0-805F-4E07-880D-36D0F2B012A5.png",
+          "name" : "E64DD0B0-805F-4E07-880D-36D0F2B012A5",
+          "position" : {
+            "scale" : 0.7,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : [
+      "iOS"
+    ]
+  }
+}

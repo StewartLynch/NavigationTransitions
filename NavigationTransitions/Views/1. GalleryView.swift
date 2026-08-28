@@ -20,7 +20,7 @@ struct GalleryView: View {
     @State private var isShowingInfo = false
     @State private var presentedDestination: Destination?
     @State private var selection = PhotoPresentationChoice.automatic
-
+    @Namespace private var transitionNamespace
 
     private let columns = [
         GridItem(.adaptive(minimum: 150, maximum: 220), spacing: 16)
@@ -50,6 +50,10 @@ struct GalleryView: View {
                             case .automatic, .navigationZoom :
                                 NavigationLink(value: destination) {
                                     DestinationCard(destination: destination)
+                                        .matchedTransitionSource(
+                                            id: destination.id,
+                                            in: transitionNamespace
+                                        )
                                 }
                                 .buttonStyle(.plain)
                             case  .fullScreenCover, .fullScreenCrossFade:
@@ -67,7 +71,17 @@ struct GalleryView: View {
             }
             .navigationTitle("Wanderlust")
             .navigationDestination(for: Destination.self) { destination in
-                DestinationDetailView(destination: destination)
+                if selection == .navigationZoom {
+                    DestinationDetailView(destination: destination)
+                        .navigationTransition(
+                            .zoom(
+                                sourceID: destination.id,
+                                in: transitionNamespace
+                            )
+                        )
+                } else {
+                    DestinationDetailView(destination: destination)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -76,11 +90,23 @@ struct GalleryView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowingInfo) {
+            .fullScreenCover(isPresented: $isShowingInfo) {
                 AboutView()
+                    .navigationTransition(.crossFade)
+                    .presentationBackground(Color.clear)
+//                    .inNavStack()
+//                    .presentationBackground(Color(.systemBackground))
+//                    .presentationDetents([.medium])
             }
-            .sheet(item: $presentedDestination) { destination in
-                DestinationDetailView(destination: destination)
+            .fullScreenCover(item: $presentedDestination) { destination in
+                if selection == .fullScreenCover {
+                    DestinationDetailView(destination: destination)
+                        .inNavStack()
+                } else {
+                    DestinationDetailView(destination: destination)
+                        .inNavStack()
+                        .navigationTransition(.crossFade)
+                }
             }
         }
     }

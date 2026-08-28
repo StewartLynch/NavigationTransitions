@@ -24,7 +24,16 @@ struct AboutView: View {
                 Label("Wanderlust", systemImage: "camera.aperture")
             } description: {
                 Text("A small gallery for exploring SwiftUI navigation transitions.")
+            } actions: {
+                Button("OK") {
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
             }
+            .frame(width: 300, height: 300)
+            .background(Color(.systemBackground), in: .rect(cornerRadius: 12))
+            .shadow(radius: 10)
+            Spacer()
         }
     }
 }

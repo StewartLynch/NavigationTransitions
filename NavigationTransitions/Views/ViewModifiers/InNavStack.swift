@@ -18,27 +18,22 @@ import SwiftUI
 
 struct InNavStack: ViewModifier {
     @Environment(\.dismiss) var dismiss
-    let isTrue: Bool
     func body(content: Content) -> some View {
-        if isTrue {
-            NavigationStack {
-                content
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(role: .close) {
-                                dismiss()
-                            }
+        NavigationStack {
+            content
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(role: .close) {
+                            dismiss()
                         }
                     }
-            }
-        } else {
-            content
+                }
         }
     }
 }
 
 extension View {
     func inNavStack(isTrue: Bool = false) -> some View {
-        modifier(InNavStack(isTrue: isTrue))
+        modifier(InNavStack())
     }
 }
